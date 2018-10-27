@@ -7,6 +7,6 @@ import android.support.annotation.Nullable;
  */
 public interface ValidationInputEditTextListener {
 
-    void onTextValidated(@Nullable String text);
+    void onValidText(@Nullable String text);
 
 }

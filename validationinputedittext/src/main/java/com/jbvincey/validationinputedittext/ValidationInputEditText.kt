@@ -120,7 +120,7 @@ class ValidationInputEditText @JvmOverloads constructor(context: Context,
     fun validateText(): Boolean {
         val text = text.toString()
         return if (text.matches(validationRegex)) {
-            validationInputEditTextListener?.onTextValidated(text)
+            validationInputEditTextListener?.onValidText(text)
             true
         } else {
             textInputLayout.error = errorText
