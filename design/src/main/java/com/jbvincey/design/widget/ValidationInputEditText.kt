@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.jbvincey.design.validationinputedittext
+package com.jbvincey.design.widget
 
 import android.content.Context
 import android.support.design.widget.TextInputEditText

@@ -21,7 +21,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
-import com.jbvincey.design.validationinputedittext.ValidationInputEditTextListener
+import com.jbvincey.design.widget.ValidationInputEditTextListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
