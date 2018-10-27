@@ -80,9 +80,9 @@ class ValidationInputEditText @JvmOverloads constructor(context: Context,
 
     private fun handleEditorAction(): Boolean {
         if (validateTextOnEditorAction) {
-            validateText()
+            return !validateText()
         }
-        return validateTextOnEditorAction
+        return false
     }
 
     //endregion
@@ -113,15 +113,18 @@ class ValidationInputEditText @JvmOverloads constructor(context: Context,
     //region validation
 
     /**
-     * Compare text against validation Regex, displaying error message on failure, and calling
+     * Compares text against validation Regex, displaying error message on failure, and calling
      * listener on success.
+     * @return true if text is validated
      */
-    fun validateText() {
+    fun validateText(): Boolean {
         val text = text.toString()
-        if (text.matches(validationRegex)) {
+        return if (text.matches(validationRegex)) {
             validationInputEditTextListener?.onTextValidated(text)
+            true
         } else {
             textInputLayout.error = errorText
+            false
         }
     }
 
