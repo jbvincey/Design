@@ -26,6 +26,7 @@ deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_g
 
 def support = [:]
 support.app_compat = "com.android.support:appcompat-v7:$versions.support"
+support.design = "com.android.support:design:$versions.support"
 deps.support = support
 
 deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"

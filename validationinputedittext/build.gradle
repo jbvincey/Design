@@ -25,11 +25,10 @@ android {
 }
 
 dependencies {
-    //implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     // kotlin runner
     implementation deps.kotlin.stdlib
 
     // app compat and design
     api deps.support.app_compat
+    api deps.support.design
 }
