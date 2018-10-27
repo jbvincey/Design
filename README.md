@@ -1,3 +1,4 @@
+[![JCenter release](https://img.shields.io/badge/jcenter-1.0.1-blue.svg?style=flat)](https://bintray.com/jbvincey/maven/Design)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 Design
@@ -5,18 +6,29 @@ Design
 
 This design library intends to propose android widgets with enhanced capabilities. The widgets available are:
  * `ValidationInputEditText` a TextInputEditText with text validation 
- 
-![ValidationInputEditText](assets/design_sample1.png?raw=true)
-![ValidationInputEditText displaying error](assets/design_sample2.png?raw=true)
+
+## Install
+
+Design is available on jcenter. To use in your project, simply add the following dependency to your app:
+```gradle
+dependencies {
+    ...
+    implementation 'com.jbvincey:design:1.0.1'
+    ...
+}
+```
 
 ## ValidationInputEditText
+
+![ValidationInputEditText](assets/design_sample1.png?raw=true)
+![ValidationInputEditText displaying error](assets/design_sample2.png?raw=true)
 
 ```xml
 <android.support.design.widget.TextInputLayout
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
-    <com.jbvincey.design.validationinputedittext.ValidationInputEditText
+    <com.jbvincey.design.widget.ValidationInputEditText
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:imeOptions="actionGo"
