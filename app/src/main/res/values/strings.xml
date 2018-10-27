@@ -4,6 +4,7 @@
     <string name="validation_regex">..*</string>
     <string name="validation_errortext">Text needs at least one character</string>
 
+    <string name="action_main">Validate text</string>
     <string name="hint">Text to validate</string>
     <string name="text_validated">Text has been validated</string>
 
