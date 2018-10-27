@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.jbvincey.validationinputedittextsample
+package com.jbvincey.designsample
 
 import org.junit.Test
 

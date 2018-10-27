@@ -1,4 +1,4 @@
-package com.jbvincey.validationinputedittext;
+package com.jbvincey.design;
 
 import org.junit.Test;
 

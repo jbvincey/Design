@@ -22,7 +22,7 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.jbvincey.validationinputedittextsample"
+        applicationId "com.jbvincey.designsample"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode rootProject.versionCode
@@ -47,8 +47,8 @@ dependencies {
     // kotlin runner
     implementation deps.kotlin.stdlib
 
-    // validationinputedittext module
-    implementation project(":validationinputedittext")
+    // design module
+    implementation project(':design')
 
     // tests
     testImplementation deps.junit

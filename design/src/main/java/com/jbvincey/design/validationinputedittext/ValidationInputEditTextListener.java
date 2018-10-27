@@ -14,4 +14,15 @@
  * limitations under the License.
  */
 
-include ':app', ':design'
+package com.jbvincey.design.validationinputedittext;
+
+import android.support.annotation.Nullable;
+
+/**
+ * Created by jbvincey on 26/10/2018.
+ */
+public interface ValidationInputEditTextListener {
+
+    void onValidText(@Nullable String text);
+
+}
