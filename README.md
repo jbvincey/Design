@@ -5,6 +5,7 @@ Design
 
 This design library intends to propose android widgets with enhanced capabilities. The widgets available are:
  * `ValidationInputEditText` a TextInputEditText with text validation 
+ 
 ![ValidationInputEditText](assets/design_sample1.png?raw=true)
 ![ValidationInputEditText displaying error](assets/design_sample2.png?raw=true)
 
