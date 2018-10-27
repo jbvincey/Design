@@ -23,12 +23,16 @@ android {
 }
 
 dependencies {
+
     // app compat
     implementation deps.support.app_compat
     implementation deps.constraint_layout
 
     // kotlin runner
     implementation deps.kotlin.stdlib
+
+    // validationinputedittext module
+    implementation project(":validationinputedittext")
 
     // tests
     testImplementation deps.junit
