@@ -66,7 +66,6 @@ class ValidationInputEditText @JvmOverloads constructor(context: Context,
 
     init {
         initAttrs(context, attrs, defStyleAttr)
-        init()
     }
 
     private fun initAttrs(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int) {
@@ -80,35 +79,11 @@ class ValidationInputEditText @JvmOverloads constructor(context: Context,
         }
     }
 
-    private fun init() {
-        addTextChangedListener(object: TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { textInputLayout.error = null }
-        })
-
-        setOnEditorActionListener { _, actionId, _ ->
-            return@setOnEditorActionListener when (actionId) {
-                imeOptions -> handleEditorAction()
-                else -> false
-            }
-        }
-    }
-
-    private fun handleEditorAction(): Boolean {
-        if (validateTextOnEditorAction) {
-            return !validateText()
-        }
-        return false
-    }
-
-    //endregion
-
-    //region TextInputLayout initialization
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         initTextInputLayout()
+        setupTextChangeListener()
+        setupEditorActionListener()
     }
 
     private fun initTextInputLayout() {
@@ -125,9 +100,33 @@ class ValidationInputEditText @JvmOverloads constructor(context: Context,
         }
     }
 
+    private fun setupTextChangeListener() {
+        addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { textInputLayout.error = null }
+        })
+    }
+
+    private fun setupEditorActionListener() {
+        setOnEditorActionListener { _, actionId, _ ->
+            return@setOnEditorActionListener when (actionId) {
+                imeOptions -> handleEditorAction()
+                else -> false
+            }
+        }
+    }
+
     //endregion
 
     //region validation
+
+    private fun handleEditorAction(): Boolean {
+        if (validateTextOnEditorAction) {
+            return !validateText()
+        }
+        return false
+    }
 
     /**
      * Compares text against validation Regex, displaying error message on failure, and calling
