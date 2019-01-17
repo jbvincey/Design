@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragmentValidationRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_default"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.jbvincey.design.widget.ValidationInputEditText
+            android:id="@+id/validationInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint"
+            android:imeOptions="actionGo"
+            android:inputType="text"
+            android:maxLines="1"
+            app:errorText="@string/validation_errortext"
+            app:validateTextOnEditorAction="true"
+            app:validationRegex="@string/validation_regex" />
+
+    </android.support.design.widget.TextInputLayout>
+
+</android.support.constraint.ConstraintLayout>
