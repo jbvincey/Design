@@ -68,7 +68,7 @@ validationInputEditText.validateText()
 ![SwipeCallback on item swipe end](assets/design_sample3.png?raw=true)
 ![SwipeCallback on item swipe start](assets/design_sample4.png?raw=true)
 
-Create your callback to pass it to an `ItemTouchHelper` to be attached to a `RecyclerView:
+Create your `SwipeCallback` to pass it to an `ItemTouchHelper` to be attached to a `RecyclerView`:
 ```
 val swipeCallbackModelStart = SwipeCallbackModel(
     color,
