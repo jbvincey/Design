@@ -1,11 +1,12 @@
-[![JCenter release](https://img.shields.io/badge/jcenter-1.0.2-blue.svg?style=flat)](https://bintray.com/jbvincey/maven/Design)
+[![JCenter release](https://img.shields.io/badge/jcenter-2.0-blue.svg?style=flat)](https://bintray.com/jbvincey/maven/Design)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 Design
 =======
 
 This design library intends to propose android widgets with enhanced capabilities. The widgets available are:
- * `ValidationInputEditText` a TextInputEditText with text validation 
+ * `ValidationInputEditText` a TextInputEditText with text validation
+ * `SwipeCallback` an ItemTouchHelper.Callback implementation to display background / icon on item swipe in RecyclerView
 
 ## Install
 
@@ -13,7 +14,7 @@ Design is available on jcenter. To use in your project, simply add the following
 ```gradle
 dependencies {
     ...
-    implementation 'com.jbvincey:design:1.0.2'
+    implementation 'com.jbvincey:design:2.0'
     ...
 }
 ```
@@ -61,6 +62,42 @@ Text is checked on editor action if you set `validateTextOnEditorAction` to true
 ```
 validationInputEditText.validateText()
 ```
+
+## SwipeCallback
+
+![SwipeCallback on item swipe end](assets/design_sample3.png?raw=true)
+![SwipeCallback on item swipe start](assets/design_sample4.png?raw=true)
+
+Create your callback to pass it to an `ItemTouchHelper` to be attached to a `RecyclerView:
+```
+val swipeCallbackModelStart = SwipeCallbackModel(
+    color,
+    drawableStart,
+    margin,
+    SwipeCallbackListener { _ -> Toast.makeText(context, "on item swiped start", Toast.LENGTH_SHORT).show() }
+)
+
+val swipeControllerModelEnd = SwipeCallbackModel(
+    color,
+    drawableEnd,
+    margin,
+    SwipeCallbackListener { _ -> Toast.makeText(context, "on item swiped end", Toast.LENGTH_SHORT).show() }
+)
+
+val itemTouchHelperCallback = SwipeCallback(swipeCallbackModelStart, swipeControllerModelEnd, context)
+val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback).apply {
+    attachToRecyclerView(recyclerView)
+}
+```
+
+`SwipeCallback` constructor takes 2 optional `SwipeCallbackModel` (one to swipe start and the other to swipe end) and a context.
+If a `SwipeCallbackModel` is null, the corresponding swipe (start or end) will be disabled.
+
+`SwipeCallbackModel` constructor takes 4 arguments:
+ * `backgroundColor` an `Int` (`@ColorInt`) defining the background color on swipe
+ * `actionDrawable` a `Drawable` defining the icon to display on swipe
+ * `actionMargin` an `Int` corresponding to the side margin for the icon
+ * `swipeCallbackListener` a `SwipeCallbackListener` where you can implement the action to do once item is swiped
 
 ## Contributors
 
