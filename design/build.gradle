@@ -45,6 +45,6 @@ dependencies {
     implementation deps.kotlin.stdlib
 
     // app compat and design
-    api deps.support.app_compat
-    api deps.support.design
+    api deps.app_compat
+    api deps.material
 }

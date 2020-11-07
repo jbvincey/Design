@@ -16,7 +16,7 @@
 
 package com.jbvincey.design.widget;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by jbvincey on 26/10/2018.

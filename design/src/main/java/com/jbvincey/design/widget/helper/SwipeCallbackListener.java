@@ -16,8 +16,9 @@
 
 package com.jbvincey.design.widget.helper;
 
-import android.support.annotation.NonNull;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by jbvincey on 22/11/2018.

@@ -19,19 +19,20 @@
  * maven repositories.
  **/
 ext {
-    compileSdkVersion = 28
+    compileSdkVersion = 29
     minSdkVersion = 17
-    targetSdkVersion = 28
+    targetSdkVersion = 29
     versionCode = 1
     versionName = "1.0"
 }
 
 ext.deps = [:]
 def versions = [:]
-versions.android_gradle_plugin = "3.2.1"
-versions.support = "28.0.0"
-versions.kotlin = "1.2.51"
-versions.constraint_layout = "1.1.2"
+versions.android_gradle_plugin = "4.0.0"
+versions.kotlin = "1.4.10"
+versions.appcompat = "1.2.0"
+versions.material = "1.2.1"
+versions.constraint_layout = "2.0.4"
 versions.junit = "4.12"
 versions.atsl_runner = "1.0.2"
 versions.espresso = "3.0.2"
@@ -40,10 +41,9 @@ def deps = [:]
 
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 
-def support = [:]
-support.app_compat = "com.android.support:appcompat-v7:$versions.support"
-support.design = "com.android.support:design:$versions.support"
-deps.support = support
+deps.app_compat = "androidx.appcompat:appcompat:$versions.appcompat"
+
+deps.material = "com.google.android.material:material:$versions.material"
 
 deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
 

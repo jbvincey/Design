@@ -18,16 +18,16 @@ package com.jbvincey.designsample.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jbvincey.design.widget.helper.SwipeCallback
 import com.jbvincey.design.widget.helper.SwipeCallbackListener
 import com.jbvincey.design.widget.helper.SwipeCallbackModel
@@ -38,9 +38,11 @@ import com.jbvincey.designsample.R
  */
 class SwipeCallbackFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_swipecallback, container, false)
-    }
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View = inflater.inflate(R.layout.fragment_swipecallback, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.findViewById<RecyclerView>(R.id.swipecallbackRecyclerView).apply {
@@ -52,7 +54,7 @@ class SwipeCallbackFragment : Fragment() {
     }
 
     private fun buildItemTouchHelper(context: Context): ItemTouchHelper {
-        val color = ContextCompat.getColor(context, R.color.colorAccent)
+        val color = ContextCompat.getColor(context, R.color.colorSecondary)
         val margin = context.resources.getDimensionPixelSize(R.dimen.margin_default)
 
         val swipeCallbackModelStart = SwipeCallbackModel(
@@ -78,10 +80,10 @@ class SwipeAdapter(private val myDataset: Array<String>) :
 
     class SwipeViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): SwipeAdapter.SwipeViewHolder {
-        return SwipeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_swipe, parent, false))
-    }
+    override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+    ) = SwipeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_swipe, parent, false))
 
     override fun onBindViewHolder(holder: SwipeViewHolder, position: Int) {
         holder.view.findViewById<TextView>(R.id.itemSwipeText).text = myDataset[position]

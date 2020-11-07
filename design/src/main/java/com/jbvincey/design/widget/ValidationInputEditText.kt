@@ -17,21 +17,22 @@
 package com.jbvincey.design.widget
 
 import android.content.Context
-import android.support.design.widget.TextInputEditText
-import android.support.design.widget.TextInputLayout
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.jbvincey.design.R
 
 /**
  * Created by jbvincey on 25/10/2018.
  */
-class ValidationInputEditText @JvmOverloads constructor(context: Context,
-                              attrs: AttributeSet? = null,
-                              defStyleAttr: Int = R.attr.editTextStyle
-): TextInputEditText(context, attrs, defStyleAttr) {
+class ValidationInputEditText @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = R.attr.editTextStyle
+) : TextInputEditText(context, attrs, defStyleAttr) {
 
     companion object {
         val DEFAULT_VALIDATION_REGEX = ".*".toRegex()
@@ -95,9 +96,6 @@ class ValidationInputEditText @JvmOverloads constructor(context: Context,
             }
             parent = parent.getParent()
         }
-        if (textInputLayout == null) {
-            throw RuntimeException("ValidationInputEditText must be in a TextInputLayout")
-        }
     }
 
     private fun setupTextChangeListener() {
@@ -121,28 +119,28 @@ class ValidationInputEditText @JvmOverloads constructor(context: Context,
 
     //region validation
 
-    private fun handleEditorAction(): Boolean {
-        if (validateTextOnEditorAction) {
-            return !validateText()
-        }
-        return false
-    }
+    private fun handleEditorAction(): Boolean =
+            if (validateTextOnEditorAction) {
+                !validateText()
+            } else {
+                false
+            }
 
     /**
      * Compares text against validation Regex, displaying error message on failure, and calling
      * listener on success.
      * @return true if text is validated
      */
-    fun validateText(): Boolean {
-        val text = text.toString()
-        return if (text.matches(validationRegex)) {
-            validationInputEditTextListener?.onValidText(text)
-            true
-        } else {
-            textInputLayout.error = errorText
-            false
-        }
-    }
+    private fun validateText(): Boolean =
+            text.toString().let { text ->
+                return if (text.matches(validationRegex)) {
+                    validationInputEditTextListener?.onValidText(text)
+                    true
+                } else {
+                    textInputLayout.error = errorText
+                    false
+                }
+            }
 
     //endregion
 

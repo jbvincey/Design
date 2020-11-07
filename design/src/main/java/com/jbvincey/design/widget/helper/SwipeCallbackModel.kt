@@ -18,7 +18,7 @@ package com.jbvincey.design.widget.helper
 
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 
 /**
  * Created by jbvincey on 22/11/2018.

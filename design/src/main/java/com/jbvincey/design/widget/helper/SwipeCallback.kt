@@ -18,11 +18,11 @@ package com.jbvincey.design.widget.helper
 
 import android.content.Context
 import android.graphics.Canvas
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
-import android.support.v7.widget.helper.ItemTouchHelper.END
-import android.support.v7.widget.helper.ItemTouchHelper.START
 import android.view.View
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.END
+import androidx.recyclerview.widget.ItemTouchHelper.START
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Created by jbvincey on 22/11/2018.
@@ -32,46 +32,51 @@ import android.view.View
  * @param swipeCallbackModelEnd a {@link SwipeCallbackModel} defining view to draw behind item on swiping end
  * @param context any context (application or activity), used to access resources
  */
-class SwipeCallback(private val swipeCallbackModelStart: SwipeCallbackModel? = null,
-                    private val swipeCallbackModelEnd: SwipeCallbackModel? = null,
-                    context: Context
+class SwipeCallback(
+        private val swipeCallbackModelStart: SwipeCallbackModel? = null,
+        private val swipeCallbackModelEnd: SwipeCallbackModel? = null,
+        context: Context
 ) : ItemTouchHelper.SimpleCallback(0,
         (if (swipeCallbackModelStart != null) START else 0) or (if (swipeCallbackModelEnd != null) END else 0)
 ) {
 
     private val isRtL = context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL
 
-    override fun onMove(recyclerView: RecyclerView,
-                        viewHolder1: RecyclerView.ViewHolder,
-                        viewHolder2: RecyclerView.ViewHolder): Boolean {
-        return false
-    }
+    override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder1: RecyclerView.ViewHolder,
+            viewHolder2: RecyclerView.ViewHolder
+    ): Boolean = false
 
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder,
-                          direction: Int) {
-        if (direction == ItemTouchHelper.START) {
+    override fun onSwiped(
+            viewHolder: RecyclerView.ViewHolder,
+            direction: Int
+    ) {
+        if (direction == START) {
             swipeCallbackModelStart?.swipeControllerListener?.onViewSwiped(viewHolder.itemView)
         } else {
             swipeCallbackModelEnd?.swipeControllerListener?.onViewSwiped(viewHolder.itemView)
         }
     }
 
-    override fun getSwipeDirs(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-        val itemView = viewHolder.itemView
-        return if (itemView is SwipeableView) {
-            (if (itemView.isSwipeableStart()) ItemTouchHelper.START else 0) or (if (itemView.isSwipeableEnd()) ItemTouchHelper.END else 0)
-        } else {
-            super.getSwipeDirs(recyclerView, viewHolder)
-        }
-    }
+    override fun getSwipeDirs(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int =
+            viewHolder.itemView.let { itemView ->
+                if (itemView is SwipeableView) {
+                    (if (itemView.isSwipeableStart()) START else 0) or (if (itemView.isSwipeableEnd()) END else 0)
+                } else {
+                    super.getSwipeDirs(recyclerView, viewHolder)
+                }
+            }
 
-    override fun onChildDraw(c: Canvas,
-                             recyclerView: RecyclerView,
-                             viewHolder: RecyclerView.ViewHolder,
-                             dX: Float,
-                             dY: Float,
-                             actionState: Int,
-                             isCurrentlyActive: Boolean) {
+    override fun onChildDraw(
+            canvas: Canvas,
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            dX: Float,
+            dY: Float,
+            actionState: Int,
+            isCurrentlyActive: Boolean
+    ) {
 
         val itemView = viewHolder.itemView
 
@@ -94,24 +99,53 @@ class SwipeCallback(private val swipeCallbackModelStart: SwipeCallbackModel? = n
             }
         }
 
-        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+        super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
 
-    private fun isSwipingStart(dX: Int): Boolean {
-        return (dX > 0 && isRtL) || (dX < 0 && !isRtL)
-    }
+    private fun isSwipingStart(dX: Int): Boolean = (dX > 0 && isRtL) || (dX < 0 && !isRtL)
 
     //region draw background
 
-    private fun drawBackgroundLeft(itemView: View, canvas: Canvas, dX: Int, swipeControllerModel: SwipeCallbackModel) {
-        drawBackground(itemView.right + dX, itemView.top, itemView.right, itemView.bottom, canvas, swipeControllerModel)
+    private fun drawBackgroundLeft(
+            itemView: View,
+            canvas: Canvas,
+            dX: Int,
+            swipeControllerModel: SwipeCallbackModel
+    ) {
+        drawBackground(
+                left = itemView.right + dX,
+                top = itemView.top,
+                right = itemView.right,
+                bottom = itemView.bottom,
+                canvas = canvas,
+                swipeControllerModel = swipeControllerModel
+        )
     }
 
-    private fun drawBackgroundRight(itemView: View, canvas: Canvas, dX: Int, swipeControllerModel: SwipeCallbackModel) {
-        drawBackground(itemView.left, itemView.top, itemView.left + dX, itemView.bottom, canvas, swipeControllerModel)
+    private fun drawBackgroundRight(
+            itemView: View,
+            canvas: Canvas,
+            dX: Int,
+            swipeControllerModel: SwipeCallbackModel
+    ) {
+        drawBackground(
+                left = itemView.left,
+                top = itemView.top,
+                right = itemView.left + dX,
+                bottom = itemView.bottom,
+                canvas = canvas,
+                swipeControllerModel = swipeControllerModel
+        )
     }
 
-    private fun drawBackground(left: Int, top: Int, right: Int, bottom: Int, canvas: Canvas, swipeControllerModel: SwipeCallbackModel) {
+    private fun drawBackground(
+            left: Int,
+            top: Int,
+            right: Int,
+            bottom: Int,
+            canvas: Canvas,
+            swipeControllerModel: SwipeCallbackModel
+    ) {
         val backgroundDrawable = swipeControllerModel.backgroundDrawable
         backgroundDrawable.setBounds(left, top, right, bottom)
         backgroundDrawable.draw(canvas)
