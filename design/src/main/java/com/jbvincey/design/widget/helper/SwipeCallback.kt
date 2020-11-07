@@ -83,19 +83,19 @@ class SwipeCallback(
         val dXInt = dX.toInt()
         if (isSwipingStart(dXInt)) {
             if (isRtL) {
-                drawBackgroundRight(itemView, c, dXInt, swipeCallbackModelStart!!)
-                drawActionDrawableRight(itemView, c, swipeCallbackModelStart)
+                drawBackgroundRight(itemView, canvas, dXInt, swipeCallbackModelStart!!)
+                drawActionDrawableRight(itemView, canvas, dXInt, swipeCallbackModelStart)
             } else {
-                drawBackgroundLeft(itemView, c, dXInt, swipeCallbackModelStart!!)
-                drawActionDrawableLeft(itemView, c, swipeCallbackModelStart)
+                drawBackgroundLeft(itemView, canvas, dXInt, swipeCallbackModelStart!!)
+                drawActionDrawableLeft(itemView, canvas, dXInt, swipeCallbackModelStart)
             }
         } else {
             if (isRtL) {
-                drawBackgroundLeft(itemView, c, dXInt, swipeCallbackModelEnd!!)
-                drawActionDrawableLeft(itemView, c, swipeCallbackModelEnd)
+                drawBackgroundLeft(itemView, canvas, dXInt, swipeCallbackModelEnd!!)
+                drawActionDrawableLeft(itemView, canvas, dXInt, swipeCallbackModelEnd)
             } else {
-                drawBackgroundRight(itemView, c, dXInt, swipeCallbackModelEnd!!)
-                drawActionDrawableRight(itemView, c, swipeCallbackModelEnd)
+                drawBackgroundRight(itemView, canvas, dXInt, swipeCallbackModelEnd!!)
+                drawActionDrawableRight(itemView, canvas, dXInt, swipeCallbackModelEnd)
             }
         }
 
@@ -155,15 +155,31 @@ class SwipeCallback(
 
     //region draw action drawable
 
-    private fun drawActionDrawableLeft(itemView: View, canvas: Canvas, swipeControllerModel: SwipeCallbackModel) {
-        drawActionDrawable(itemView, canvas, swipeControllerModel, true)
+    private fun drawActionDrawableLeft(
+            itemView: View,
+            canvas: Canvas,
+            dX: Int,
+            swipeControllerModel: SwipeCallbackModel
+    ) {
+        drawActionDrawable(itemView, canvas, dX, swipeControllerModel, true)
     }
 
-    private fun drawActionDrawableRight(itemView: View, canvas: Canvas, swipeControllerModel: SwipeCallbackModel) {
-        drawActionDrawable(itemView, canvas, swipeControllerModel, false)
+    private fun drawActionDrawableRight(
+            itemView: View,
+            canvas: Canvas,
+            dX: Int,
+            swipeControllerModel: SwipeCallbackModel
+    ) {
+        drawActionDrawable(itemView, canvas, dX, swipeControllerModel, false)
     }
 
-    private fun drawActionDrawable(itemView: View, canvas: Canvas, swipeControllerModel: SwipeCallbackModel, drawLeft: Boolean) {
+    private fun drawActionDrawable(
+            itemView: View,
+            canvas: Canvas,
+            dX: Int,
+            swipeControllerModel: SwipeCallbackModel,
+            drawLeft: Boolean
+    ) {
         val actionDrawable = swipeControllerModel.actionDrawable
 
         if (actionDrawable != null) {
@@ -179,6 +195,13 @@ class SwipeCallback(
             val actionDrawableTop = itemView.top + (itemHeight - intrinsicHeight) / 2
             val actionDrawableBottom = actionDrawableTop + intrinsicHeight
             actionDrawable.setBounds(actionDrawableLeft, actionDrawableTop, actionDrawableRight, actionDrawableBottom)
+
+            val clipLeft = if (drawLeft) itemView.right + dX else itemView.left
+            val clipTop = itemView.top
+            val clipRight = if (drawLeft) itemView.right else itemView.left + dX
+            val clipBottom = itemView.bottom
+
+            canvas.clipRect(clipLeft, clipTop, clipRight, clipBottom)
 
             actionDrawable.draw(canvas)
         }
