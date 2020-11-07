@@ -1,4 +1,4 @@
-[![JCenter release](https://img.shields.io/badge/jcenter-3.0-blue.svg?style=flat)](https://bintray.com/jbvincey/maven/Design)
+[![JCenter release](https://img.shields.io/badge/jcenter-3.0.2-blue.svg?style=flat)](https://bintray.com/jbvincey/maven/Design)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 Design
@@ -14,7 +14,7 @@ Design is available on jcenter. To use in your project, simply add the following
 ```gradle
 dependencies {
     ...
-    implementation 'com.jbvincey:design:3.0'
+    implementation 'com.jbvincey:design:3.0.2'
     ...
 }
 ```
