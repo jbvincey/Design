@@ -131,7 +131,7 @@ class ValidationInputEditText @JvmOverloads constructor(
      * listener on success.
      * @return true if text is validated
      */
-    private fun validateText(): Boolean =
+    fun validateText(): Boolean =
             text.toString().let { text ->
                 return if (text.matches(validationRegex)) {
                     validationInputEditTextListener?.onValidText(text)
