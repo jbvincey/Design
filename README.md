@@ -1,4 +1,4 @@
-[![JCenter release](https://img.shields.io/badge/jcenter-3.0.2-blue.svg?style=flat)](https://bintray.com/jbvincey/maven/Design)
+[![Maven Central release](https://img.shields.io/badge/jcenter-3.0.2-blue.svg?style=flat)](https://s01.oss.sonatype.org/service/local/repositories/releases/content/com/github/jbvincey/design/3.0.2/)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 Design
@@ -10,14 +10,21 @@ This design library intends to propose android widgets with enhanced capabilitie
 
 ## Install
 
-Design is available on jcenter. To use in your project, simply add the following dependency to your app:
+Design is available on **Maven Central**. To use in your project, simply add the following dependency to your app:
 ```gradle
 dependencies {
     ...
-    implementation 'com.jbvincey:design:3.0.2'
+    implementation 'com.github.jbvincey:design:3.0.2'
     ...
 }
 ```
+
+#### WARNING
+
+Design used to be available on **JCenter** under the package name `com.jbvincey:design`. 
+Due to **JCenter** shutdown , the Design library has been migrated to **Maven Central** with a different package name `com.github.jbvincey:design`.
+If you were pulling the Design library from **JCenter**, make sure to add **Maven Central** repository in your configuration and to update the package name of Design library.
+
 
 ## ValidationInputEditText
 
